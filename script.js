@@ -1,7 +1,6 @@
 const GRID_WIDTH = 16;
 const GRID_HEIGHT = 16;
 const container = document.querySelector("#container");
-console.log(container);
 
 createGrid(GRID_WIDTH, GRID_HEIGHT);
 
@@ -27,4 +26,13 @@ function createCells (numOfCells) {
             row.appendChild(cell);
         }
     }) 
+}
+
+container.addEventListener("mouseover", (event) => {
+    const cell = event.target;
+    changeBackgroundColor(cell, "black");
+});
+
+function changeBackgroundColor (cell, newColor) {
+    cell.style.backgroundColor = newColor;
 }

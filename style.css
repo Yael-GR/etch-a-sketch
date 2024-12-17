@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body, #container, .rows, .cells {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#container {
+    flex-direction: column;
+    width: 80vmin;  /* Grid size is 80% of the smallest viewport dimension */
+    height: 80vmin;
+}
+
+.cells {
+    flex: 1;
+    aspect-ratio: 1 / 1; /* Makes cells square */
+    border-top: solid;
+    border-left: solid;
+}
+
+.cells:last-child {
+    border-right: solid;
+}
+
+.rows:last-child .cells {
+    border-bottom: solid;
+}
