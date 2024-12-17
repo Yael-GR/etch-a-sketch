@@ -11,10 +11,25 @@ html, body, #container, .rows, .cells {
     align-items: center;
 }
 
+body {
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em;
+}
+
+#start {
+    font-size: 6px;
+    width: fit-content;
+    padding: 4px 8px;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
 #container {
     flex-direction: column;
     width: 80vmin;  /* Grid size is 80% of the smallest viewport dimension */
     height: 80vmin;
+    flex-shrink: 1;   
 }
 
 .cells {

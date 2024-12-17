@@ -1,12 +1,18 @@
-const GRID_WIDTH = 16;
-const GRID_HEIGHT = 16;
 const container = document.querySelector("#container");
+const startBtn = document.querySelector("#start");
 
-createGrid(GRID_WIDTH, GRID_HEIGHT);
+startBtn.addEventListener("click", () => {
+   let gridSize;
+   do {
+    gridSize = Math.round(prompt("Please enter your desired grid size:"));
+   } while (typeof gridSize != "number");
+   clearGrid();
+   createGrid(gridSize);
+})
 
-function createGrid (width, height) {
-    createRows(height);
-    createCells(width);
+function createGrid (sizeOfGrid) {
+    createRows(sizeOfGrid);
+    createCells(sizeOfGrid);
 }
 
 function createRows (numOfRows) {
@@ -28,9 +34,17 @@ function createCells (numOfCells) {
     }) 
 }
 
+function clearGrid () {
+    while (container.firstChild) {
+        container.removeChild(container.lastChild);
+    }
+}
+
 container.addEventListener("mouseover", (event) => {
     const cell = event.target;
-    changeBackgroundColor(cell, "black");
+    if (cell.classList.contains("cells")) {
+        changeBackgroundColor(cell, "black");
+    }
 });
 
 function changeBackgroundColor (cell, newColor) {
