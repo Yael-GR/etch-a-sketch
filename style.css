@@ -2,6 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: rgb(145, 0, 0);
+    color: rgb(250, 233, 211);
 }
 
 html, body, #container, .rows, .cells {
@@ -17,18 +19,25 @@ body {
     padding: 1em;
 }
 
+#selectors {
+    display: flex;
+}
+
 button {
+    font-size: 18px;
     width: fit-content;
     padding: 4px 8px;
     flex-shrink: 0;
     flex-grow: 0;
+    background-color: rgb(250, 233, 211);
+    color: rgb(145, 0, 0);
 }
 
 #container {
     flex-direction: column;
     width: 80vmin;  /* Grid size is 80% of the smallest viewport dimension */
     height: 80vmin;
-    flex-shrink: 1;   
+    flex-shrink: 1;
 }
 
 .cells {
@@ -36,6 +45,7 @@ button {
     aspect-ratio: 1 / 1; /* Makes cells square */
     border-top: solid;
     border-left: solid;
+    background-color: white;  
 }
 
 .cells:last-child {

@@ -1,5 +1,5 @@
 const container = document.querySelector("#container"); // Get DOM nodes.
-const startBtn = document.querySelector("#start");
+const startBtn = document.querySelector("#sizer");
 
 let gridSize = 16;
 createGrid(gridSize);
