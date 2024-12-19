@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Montez&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Sour Gummy";
     background-color: rgb(145, 0, 0);
     color: rgb(250, 233, 211);
 }
@@ -10,13 +13,17 @@ html, body, #container, .rows, .cells {
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-content: center;
 }
 
 body {
     flex-direction: column;
+    min-height: 100vh;
     gap: 1em;
-    padding: 1em;
+}
+
+#header {
+    font-family: "montez";
 }
 
 #selectors {
