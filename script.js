@@ -1,23 +1,56 @@
 const container = document.querySelector("#container"); // Get DOM nodes.
-const startBtn = document.querySelector("#sizer");
+const buttons = document.querySelector("#selectors");
+const sizeBtn = document.querySelector("#sizer");
+const clearBtn = document.querySelector("#clear");
+const blackBtn = document.querySelector("#black");
+const rainbowBtn = document.querySelector("#rainbow");
+const colorBtn = document.querySelector("#colorPicker");
+const eraseBtn = document.querySelector("#eraser");
 
-let gridSize = 16;
+const backgroundColor = "white"; // Set colors
+let brushColor = "black";
+let colorPickerValue ="#910000";
+
+const gridSizeArr = [10, 15, 20, 25, 30]; // Initialize grid
+let gridSize = gridSizeArr[0];
 createGrid(gridSize);
 
-startBtn.addEventListener("click", () => {
-   do {
-    gridSize = Math.round(prompt("Please enter your desired grid size:"));
-   } while (typeof gridSize != "number");
-   clearGrid();
-   createGrid(gridSize);
+sizeBtn.addEventListener("click", () => { // Change grid size, based on the next size in the array.
+    gridSize = nextGridSize();
+    deleteGrid();
+    createGrid(gridSize);
 })
+
+blackBtn.addEventListener("click", () => {brushColor = "black";});
+rainbowBtn.addEventListener("click", () => {brushColor = "rainbow";});
+colorBtn.addEventListener("click", () => {brushColor = colorPickerValue;});
+eraseBtn.addEventListener("click", () => {brushColor = "white";});
+
+clearBtn.addEventListener("click", () => { // Clear grid
+    const cells = document.querySelectorAll(".cells");
+    cells.forEach(cell => {changeBackgroundColor(cell, backgroundColor)});
+})
+
+function nextGridSize () {
+    const currentIndex = gridSizeArr.indexOf(gridSize);
+    if (currentIndex < gridSizeArr.length-1) {return gridSizeArr[currentIndex + 1];}
+    else {return gridSizeArr[0];}
+}
+
+function deleteGrid () {
+    while (container.firstChild) {
+        container.removeChild(container.lastChild);
+    }
+}
 
 function createGrid (sizeOfGrid) {
     createRows(sizeOfGrid);
     createCells(sizeOfGrid);
+    const cells = document.querySelectorAll(".cells");
+    cells.forEach(cell => {changeBackgroundColor(cell, backgroundColor)});
 }
 
-function createRows (numOfRows) {
+function createRows (numOfRows) { // createGrid helper function
     for (let i = 0; i < numOfRows; i++) {
         const row = document.createElement("div");
         row.classList = "rows";
@@ -25,7 +58,7 @@ function createRows (numOfRows) {
     }
 }
 
-function createCells (numOfCells) {
+function createCells (numOfCells) { // createGrid helper function
     const rows = document.querySelectorAll(".rows");
     rows.forEach(row => {
         for (let j = 0; j < numOfCells; j++) {
@@ -36,19 +69,27 @@ function createCells (numOfCells) {
     }) 
 }
 
-function clearGrid () {
-    while (container.firstChild) {
-        container.removeChild(container.lastChild);
-    }
-}
-
-container.addEventListener("mouseover", (event) => {
+container.addEventListener("mouseover", (event) => { // Detect mouse location and call changeBackgroundColor helper function
     const cell = event.target;
     if (cell.classList.contains("cells")) {
-        changeBackgroundColor(cell, "black");
+        changeBackgroundColor(cell, brushColor);
     }
 });
 
 function changeBackgroundColor (cell, newColor) {
-    cell.style.backgroundColor = newColor;
+    if (newColor === "rainbow") {cell.style.backgroundColor = getRandomRgb()}
+    else {cell.style.backgroundColor = newColor;}
 }
+
+function getRandomRgb () {
+    var num = Math.round(0xffffff * Math.random());
+    var r = num >> 16;
+    var g = num >> 8 & 255;
+    var b = num & 255;
+    return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+  }
+
+colorPicker.addEventListener("input", (event) => { // Detect Color Picker change
+    colorPickerValue = event.target.value;
+    brushColor = colorPickerValue;
+}, false);
