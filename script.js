@@ -1,8 +1,10 @@
-const container = document.querySelector("#container");
+const container = document.querySelector("#container"); // Get DOM nodes.
 const startBtn = document.querySelector("#start");
 
+let gridSize = 16;
+createGrid(gridSize);
+
 startBtn.addEventListener("click", () => {
-   let gridSize;
    do {
     gridSize = Math.round(prompt("Please enter your desired grid size:"));
    } while (typeof gridSize != "number");
