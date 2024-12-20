@@ -10,6 +10,7 @@ const eraseBtn = document.querySelector("#eraser");
 const backgroundColor = "white"; // Set colors
 let brushColor = "black";
 let colorPickerValue ="#910000";
+const rainbowColorsArr = ["#629677", "#495D63", "#FF6B6B", "#F9DB6D", "#A1C6EA"]
 
 const gridSizeArr = [10, 15, 20, 25, 30]; // Initialize grid
 let gridSize = gridSizeArr[0];
@@ -77,17 +78,14 @@ container.addEventListener("mouseover", (event) => { // Detect mouse location an
 });
 
 function changeBackgroundColor (cell, newColor) {
-    if (newColor === "rainbow") {cell.style.backgroundColor = getRandomRgb()}
+    if (newColor === "rainbow") {cell.style.backgroundColor = getRainbowColor()}
     else {cell.style.backgroundColor = newColor;}
 }
 
-function getRandomRgb () {
-    var num = Math.round(0xffffff * Math.random());
-    var r = num >> 16;
-    var g = num >> 8 & 255;
-    var b = num & 255;
-    return 'rgb(' + r + ', ' + g + ', ' + b + ')';
-  }
+function getRainbowColor () {
+    const randomIndex = Math.floor(Math.random() * 5); // Get a random index number 0-4
+    return rainbowColorsArr[randomIndex];
+}
 
 colorPicker.addEventListener("input", (event) => { // Detect Color Picker change
     colorPickerValue = event.target.value;
