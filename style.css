@@ -102,3 +102,7 @@ button {
 .rows:last-child .cells {
     border-bottom: solid;
 }
+
+footer {
+    padding: 10px;
+}
